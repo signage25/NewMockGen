@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Signage Mockup</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-section">
+            <div class="input-group">
+                <input type="file" id="imageUpload" accept="image/*">
+                <select id="materialType">
+                    <option value="metal">Metal</option>
+                    <option value="acrylic">Acrylic</option>
+                    <option value="plastic">Plastic</option>
+                </select>
+                <button id="processButton">Generate 3D Mockup</button>
+            </div>
+            <div class="preview-container">
+                <img id="imagePreview" alt="Preview" style="display: none;">
+            </div>
+        </div>
+        <canvas id="renderCanvas"></canvas>
+        <div class="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+    <script src="js/renderer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
