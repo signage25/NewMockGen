@@ -14,17 +14,19 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# Update CORS settings to allow your frontend domain
+# Update CORS settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://signage-3d-frontend.onrender.com",
-        "http://localhost:8080"
-    ],
+    allow_origins=["*"],  # Allow all origins temporarily for testing
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add a test endpoint
+@app.get("/")
+async def root():
+    return {"message": "Backend is running"}
 
 # Make sure temp directory exists
 os.makedirs("temp", exist_ok=True)
