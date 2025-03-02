@@ -9,7 +9,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.9.0
 
-  - type: static
+  - type: static-site
     name: signage-3d-frontend
     rootDir: frontend
     buildCommand: echo "Static site"
