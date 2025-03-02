@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 import os
 import logging
 from app.processor.image_processor import ImageProcessor
@@ -14,19 +14,29 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# Update CORS settings
+# CORS settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins temporarily for testing
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Add a test endpoint
 @app.get("/")
 async def root():
     return {"message": "Backend is running"}
+
+@app.get("/test")
+async def test():
+    return {"status": "ok", "message": "Test endpoint working"}
+
+@app.post("/test-upload")
+async def test_upload(file: UploadFile = File(...)):
+    return {
+        "filename": file.filename,
+        "content_type": file.content_type
+    }
 
 # Make sure temp directory exists
 os.makedirs("temp", exist_ok=True)
